@@ -1,0 +1,58 @@
+.navbar-brand {
+    font-size: 2.25rem;
+    color: rgb(165, 70, 70)!important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar {
+    background-color: rgba(216, 209, 209, 0.4)!important;
+}
+
+footer {
+    background-color: rgba(216, 209, 209, 0.5);
+    color: rgb(165, 70, 70);
+    border-top: solid 2px rgb(165, 70, 70);
+    }
+
+.py-3 {
+    padding-top: 5px!important;
+    padding-bottom: 5px!important;
+}
+
+#typeofwine {
+    margin-top: 15px!important;
+}
+
+#search {
+    margin-top: 15px!important;
+}
+
+/*background image*/
+body, html {
+    height: 100%;
+    margin: 0;
+    background-image: url(https://images.pexels.com/photos/6290/alcohol-party-glass-table.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    background-size: cover;
+}
+
+.jumbotron {
+    margin-top: 30px;
+    background-color: rgba(46, 38, 38, 0.6);
+    color: silver;
+    padding-top: 40px!important;
+    padding-bottom: 40px!important;
+}
+
+.card {
+    background-color: rgba(46, 38, 38, 0.6)!important;
+    color: silver;
+}
+
+.card-header {
+    font-size: 20px;
+}
+
+#wine-table {
+    color: silver;
+}
