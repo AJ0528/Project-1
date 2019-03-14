@@ -1,6 +1,6 @@
 .navbar-brand {
     font-size: 2.25rem;
-    color: rgb(165, 70, 70)!important;
+    color: rgb(87, 67, 4)!important;
     margin-left: auto;
     margin-right: auto;
 }
@@ -11,8 +11,8 @@
 
 footer {
     background-color: rgba(216, 209, 209, 0.5);
-    color: rgb(165, 70, 70);
-    border-top: solid 2px rgb(165, 70, 70);
+    color: rgb rgb(87, 67, 4);
+    border-top: solid 2px  rgb(87, 67, 4);
     }
 
 .py-3 {
@@ -20,11 +20,11 @@ footer {
     padding-bottom: 5px!important;
 }
 
-#typeofwine {
+#cityorzip {
     margin-top: 15px!important;
 }
 
-#search {
+.form-check, .form-row {
     margin-top: 15px!important;
 }
 
@@ -32,7 +32,7 @@ footer {
 body, html {
     height: 100%;
     margin: 0;
-    background-image: url(https://images.pexels.com/photos/6290/alcohol-party-glass-table.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    background-image: url(https://images.pexels.com/photos/159291/beer-machine-alcohol-brewery-159291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
     background-size: cover;
 }
 
@@ -53,6 +53,10 @@ body, html {
     font-size: 20px;
 }
 
-#wine-table {
+#beer-table {
     color: silver;
+}
+
+#directionbutton {
+    float: right;
 }
