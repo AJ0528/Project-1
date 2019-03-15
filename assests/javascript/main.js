@@ -5,11 +5,14 @@ var zip = "";
 var type = "";
 var tags = "";
 
-
+var breweryName;
 var breweryLong;
 var breweryLat;
 
-var userIP;
+var userLng;
+var userLat;
+
+
     geocodeQuery();
     breweryQuery();
     userLocation();
@@ -24,11 +27,11 @@ function breweryQuery() {
         method: "GET"
     }).then(function(response){
         //console.log(response);
-        var breweryName = response[1].name;
+         breweryName = response[1].name;
         //console.log(breweryName)
-        var breweryLong = response[1].longitude;
+         breweryLong = response[1].longitude;
         //console.log(breweryLong);
-        var breweryLat = response[1].latitude;
+         breweryLat = response[1].latitude;
         //console.log(breweryLat);
 
     })
@@ -55,7 +58,7 @@ function geocodeQuery() {
 
 function userLocation() {
 
-    var queryURL = "https://api.ipdata.co?api-key=test";
+    var queryURL = "https://api.ipdata.co?api-key=6d5121609c51d8dafbeda8616b5780777d0e365fe72348da8ee78be6";
     
     console.log(queryURL)
     $.ajax({
@@ -66,10 +69,74 @@ function userLocation() {
         console.log(response.latitude);
         console.log(response.longitude);
 
+        userLng = response.longitude;
+        userLat = response.latitude;
+
     })
 }
 
 
+
+// function initMap() {
+//     var directionsService = new google.maps.DirectionsService;
+//     var directionsDisplay = new google.maps.DirectionsRenderer;
+//     var map = new google.maps.Map(document.getElementById('map'), {
+//       zoom: 7,
+//       center: {lat: 41.85, lng: -87.65}
+//     });
+//     directionsDisplay.setMap(map);
+
+//     var onChangeHandler = function() {
+//         calculateAndDisplayRoute(directionsService, directionsDisplay);
+//         calculateAndDisplayRoute();
+//       };
+      
+//       onChangeHandler();
+//   }
+
+//   function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+//     directionsService.route({
+//       origin: userLat,userLng,
+//       destination: userLat, userLng,
+//       travelMode: 'DRIVING'
+//     }, function(response, status) {
+//       if (status === 'OK') {
+//         directionsDisplay.setDirections(response);
+//       } else {
+//         window.alert('Directions request failed due to ' + status);
+//       }
+//     });
+//   }
+
+  function initMap() {
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 7,
+      center: {lat: 41.85, lng: -87.65}
+    });
+    directionsDisplay.setMap(map);
+
+   
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+    
+    
+  }
+
+  function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    directionsService.route({
+        origin: ("-34.397, 150.644"),
+       destination: ("-34.397, 150.644"),
+      travelMode: 'DRIVING'
+    }, function(response, status) {
+      if (status === 'OK') {
+        directionsDisplay.setDirections(response);
+        console.log(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+  }
 
 
 
