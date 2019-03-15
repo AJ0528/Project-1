@@ -9,8 +9,8 @@ var breweryName;
 var breweryLong;
 var breweryLat;
 
-var userLng;
-var userLat;
+var userLatLng;
+
 
 
     geocodeQuery();
@@ -66,11 +66,18 @@ function userLocation() {
         method: "GET"
     }).then(function(response){
         console.log(response);
-        console.log(response.latitude);
-        console.log(response.longitude);
+        
+        
 
-        userLng = response.longitude;
-        userLat = response.latitude;
+        
+        userLatLng = response.latitude+", "+response.longitude;
+        
+        console.log(userLatLng);
+
+
+
+        $("body").append('<div id="map"></div>');
+        $("body").append('<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKq8REnjHZj_hZnwsvWxa6F_YJ9RL8O7w&callback=initMap"></script>');
 
     })
 }
@@ -125,13 +132,12 @@ function userLocation() {
 
   function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     directionsService.route({
-        origin: ("-34.397, 150.644"),
-       destination: ("-34.397, 150.644"),
+        origin: userLatLng,
+       destination: ("28.600761, -81.169216"),
       travelMode: 'DRIVING'
     }, function(response, status) {
       if (status === 'OK') {
         directionsDisplay.setDirections(response);
-        console.log(response);
       } else {
         window.alert('Directions request failed due to ' + status);
       }
