@@ -1,13 +1,19 @@
 var name = "";
 var state = "";
 var city = "";
-//var zip = "";
+var zip = "";
 var type = "";
 var tags = "";
-    
+
+
+var breweryLong;
+var breweryLat;
+
+var userIP;
     geocodeQuery();
     breweryQuery();
-    directionsQuery();
+    userLocation();
+    
     
     
 function breweryQuery() {   
@@ -24,7 +30,6 @@ function breweryQuery() {
         //console.log(breweryLong);
         var breweryLat = response[1].latitude;
         //console.log(breweryLat);
-        //$(".result").text(breweryName + breweryLat + breweryLong)
 
     })
 }
@@ -38,19 +43,33 @@ function geocodeQuery() {
         url: queryURL,
         method: "GET"
     }).then(function(response){
-        console.log(response);
+
+        //returns city
+        console.log(response.results[0].postcode_localities[1]);
+        //returns state
+        console.log(response.results[0].address_components[3].long_name);
+        
 
     })
 }
 
-function directionsQuery() {   
-    var queryURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDKslsrzneWMfjKEnPVY4lhwgqEtK3wgow&callback=initMap";
+function userLocation() {
+
+    var queryURL = "https://api.ipdata.co?api-key=test";
+    
     console.log(queryURL)
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response){
         console.log(response);
+        console.log(response.latitude);
+        console.log(response.longitude);
 
     })
 }
+
+
+
+
+
