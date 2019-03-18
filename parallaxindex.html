@@ -7,6 +7,7 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="parallaxstyle.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
@@ -14,9 +15,10 @@
     <!--Nav bar-->
   <nav class="blue-grey darken-2" role="navigation">
     <div class="nav-wrapper container">
-      <h4 id="logo-container" class="brand-logo amber-text accent-4">MAJA Brewery Finder</h4>
+      <span id="logo-container" class="brand-logo amber-text accent-4">MAJA Brewery Finder <i class="fas fa-beer small"></i></span>
       <ul class="right hide-on-med-and-down">
       </ul>
+      </div>
   </nav>
 
   <div id="index-banner" class="parallax-container">
@@ -49,20 +51,24 @@
           </div>
           <div class="row">
             <div class="col s6">
-              <div class="input-field inline">
+              <div class="input-field">
                 <input id="citystatezip" type="email">
                 <label class="grey-text" for="citystatezip">City or State or Zip code</label>
-                <br>
-                <input type="radio" name="radioList" id="city" value="city"/>
-                  <label for="city">City</label>
-                
-                  <input type="radio" name="radioList" id="state" value="state"/>
-                  <label for="state">State</label>
-
-                  <input type="radio" name="radioList" id="zipcode" value="zipcode"/>
-                  <label for="zipcode">Zip Code</label>
               </div>
-              <br><br>
+                
+                <form action="#">
+                  <input name="radioList" type="radio" id="city"/>
+                  <label class="black-background" for="city">City</label>
+                  
+                  <input name="radioList" type="radio" id="state"/>
+                  <label for="state">State</label>
+                  
+                  <input name="radioList" type="radio" id="zipcode"/>
+                  <label for="zipcode">Zip Code</label>
+                  
+                </form>
+              
+              <br>
               <div class="row" id="typedropdown">
                 <div class="input-field col s6">
                   <select>
@@ -91,8 +97,9 @@
                   <th>Review</th>
               </tr>
             </thead>
-    
+            
             <tbody>
+                <a class="waves-effect waves-light light grey darken-1 btn" id="getDirections"><i class="material-icons left">directions</i>Directions</a>
               </tbody>
             </table>
 
@@ -120,8 +127,8 @@
       <div class="row">
         <div class="col s12 center" id="mappage">
           <h3><i class="mdi-content-send white-text"></i></h3>
-          <h4>Map</h4>
-          <a class="waves-effect waves-light light grey darken-1 btn" id="getDirections"><i class="material-icons left">directions</i>Directions</a>
+          <h4><i class="fas fa-location-arrow"></i> Map/Directions</h4>
+          <!-- <a class="waves-effect waves-light light grey darken-1 btn" id="getDirections"><i class="material-icons left">directions</i>Directions</a> -->
         </div>
       </div>
 
@@ -143,7 +150,7 @@
   <footer class="page-footer brown">
     <div class="footer-copyright center-align">
       <div class="container">
-      Copyright <a class="brown-text text-lighten-3" href="http://materializecss.com">© 2019 MAJA</a>
+      Copyright © 2019 MAJA</p>
       </div>
     </div>
   </footer>
