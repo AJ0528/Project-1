@@ -53,8 +53,9 @@
  }
  
  footer.page-footer {
-   margin: 0;
- }
+    color: silver;
+    margin: 0;
+}
 
 body {
      background-color: #37474f;
@@ -70,7 +71,7 @@ body {
 }
 
 #searchbutton {
-    margin-top: 150px;
+    margin-top: 130px;
 }
 
 ul.dropdown-content.select-dropdown li span {
@@ -89,8 +90,9 @@ ul.dropdown-content.select-dropdown li span {
     clear:both;
 }
 
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after {
+    background-color: rgb(190, 153, 50);
+    border: 2px solid black;
+}
 
 
-
-
- 
