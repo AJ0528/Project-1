@@ -86,7 +86,10 @@ ul.dropdown-content.select-dropdown li span {
 
 #resultstable {
     display: none;
+    clear:both;
 }
+
+
 
 
 
