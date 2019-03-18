@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>MAJA Brewery Finder</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="parallaxstyle.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+    <!--Nav bar-->
+  <nav class="blue-grey darken-2" role="navigation">
+    <div class="nav-wrapper container">
+      <h4 id="logo-container" class="brand-logo amber-text accent-4">MAJA Brewery Finder</h4>
+      <ul class="right hide-on-med-and-down">
+      </ul>
+  </nav>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center amber-text accent-4">Find your new favorite brewery!</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">Search by name, city or state or zip.</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="https://images.pexels.com/photos/1400255/pexels-photo-1400255.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="beer image"></div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+      <!--   Search Section   -->
+      <div class="row">
+        <form class="col s6">
+          <div class="row">
+            <div class="col s6">
+              <div class="input-field inline">
+                <input id="name" type="email">
+                <label class="grey-text" for="name">Name</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s6">
+              <div class="input-field inline">
+                <input id="citystatezip" type="email">
+                <label class="grey-text" for="citystatezip">City or State or Zip code</label>
+                <br>
+                <input type="radio" name="radioList" id="city" value="city"/>
+                  <label for="city">City</label>
+                
+                  <input type="radio" name="radioList" id="state" value="state"/>
+                  <label for="state">State</label>
+
+                  <input type="radio" name="radioList" id="zipcode" value="zipcode"/>
+                  <label for="zipcode">Zip Code</label>
+              </div>
+              <br><br>
+              <div class="row" id="typedropdown">
+                <div class="input-field col s6">
+                  <select>
+                    <option value="" disabled selected>Type</option>
+                    <option value="1">Micro</option>
+                    <option value="2">Regional</option>
+                    <option value="3">Brewpub</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row right" id="searchbutton">
+              <a class="waves-effect waves-light light grey darken-1 btn" id="runQuery"><i class="material-icons left">search</i>Search</a>
+            </div>
+          </div>
+        </form>
+
+        <div class="row" id="resultstable">
+          <table class="highlight grey-text">
+            <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Phone #</th>
+                  <th>Website</th>
+                  <th>Review</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              </tbody>
+            </table>
+
+          </div>
+        
+        </div>
+     </div>
+  </div>
+  
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">A great solution to find your new favorite brewery.</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="https://images.pexels.com/photos/159291/beer-machine-alcohol-brewery-159291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="beer image"></div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 center" id="mappage">
+          <h3><i class="mdi-content-send white-text"></i></h3>
+          <h4>Map</h4>
+          <a class="waves-effect waves-light light grey darken-1 btn" id="getDirections"><i class="material-icons left">directions</i>Directions</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">A great solution to find your new favorite brewery.</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="beer image"></div>
+  </div>
+
+  <footer class="page-footer brown">
+    <div class="footer-copyright center-align">
+      <div class="container">
+      Copyright <a class="brown-text text-lighten-3" href="http://materializecss.com">© 2019 MAJA</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="materialize.js"></script>
+  <script src="init.js"></script>
+
+  </body>
+</html>
