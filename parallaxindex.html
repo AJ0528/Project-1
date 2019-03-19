@@ -40,17 +40,16 @@
 
       <!--   Search Section   -->
       <div class="row">
-        <form class="col s6">
-          <div class="row">
-            <div class="col s6">
-              <div class="input-field inline">
-                <input id="name" type="email">
-                <label class="grey-text" for="name">Name</label>
+        <form class="col s12">
+          
+            <div class="col s3">
+              <div class="input-field">
+                <input type="text" id="name" class="autocomplete">
+                <label class="grey-text" for="autocomplete-input">Name</label>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col s6">
+          
+            <div class="col s3">
               <div class="input-field">
                 <input id="citystatezip" type="email">
                 <label class="grey-text" for="citystatezip">City or State or Zip code</label>
@@ -65,26 +64,22 @@
                   
                   <input name="radioList" type="radio" id="zipcode"/>
                   <label for="zipcode">Zip Code</label>
-                  
                 </form>
-              
-              <br>
-              <div class="row" id="typedropdown">
-                <div class="input-field col s6">
-                  <select>
-                    <option value="" disabled selected>Type</option>
-                    <option value="1">Micro</option>
-                    <option value="2">Regional</option>
-                    <option value="3">Brewpub</option>
-                  </select>
-                </div>
-              </div>
             </div>
-            <div class="row right" id="searchbutton">
-              <a class="waves-effect waves-light light grey darken-1 btn" id="runQuery"><i class="material-icons left">search</i>Search</a>
-            </div>
-          </div>
         </form>
+
+        <div class="input-field col s3">
+          <select>
+            <option value="" disabled selected>Type</option>
+            <option value="1">Micro</option>
+            <option value="2">Regional</option>
+            <option value="3">Brewpub</option>
+          </select>
+        </div>
+
+        <div class="row right" id="searchbutton">
+          <a class="waves-effect waves-light light grey darken-1 btn" id="runQuery"><i class="material-icons left">search</i>Search</a>
+        </div>
 
         <div class="row" id="resultstable">
           <table class="highlight grey-text">
