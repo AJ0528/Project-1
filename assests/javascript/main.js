@@ -12,56 +12,61 @@ var breweryURL;
 var breweryRating;
 var breweryLong;
 var breweryLat;
+var breweryLatLng;
 
 var userLatLng;
 
+var queryResponse = [];
+
+var alphabetArray = [];
 
 
+//alphabetArr();
 //geocodeQuery();
 //breweryQuery();
-//getaddress();
+
 
 $("#runQuery").on("click", function () {
-    if( $("#name").val() == ""){
+    name = "";
+    state = "";
+    city = "";
+    zip = "";
+    type = "";
+    tags = "";
+
+    if ($("#name").val() == "") {
         name = "";
-    } else{
+    } else {
         name = $("#name").val();;
     }
-    
 
     if ($("#state").is(":checked")) { state = $("#citystatezip").val() };
 
     if ($("#city").is(":checked")) { city = $("#citystatezip").val() };
 
-    if ($("#zip").is(":checked")) {
-        geocodeQuery()
-        zip = $("#citystatezip  ").val()
-
-        
-    };
-
-    type = $("option").val();
+    type = $("#typedropdown option:selected").text()
 
     switch (type) {
-        case 1:
-            type = "micro";
+        case "Micro":
+            type = "Micro";
             break;
-        case 2:
-            type = "reigonal"
+        case "Regional":
+            type = "Reigonal"
             break;
-        case 3:
-            type = "brewpub"
+        case "Brewpub":
+            type = "Brewpub"
             break;
         default:
             type = "";
             break;
     }
-console.log(name);
-console.log(state);
-console.log(city);
-console.log(zip);
-console.log(type);
 
+
+    if ($("#zipcode").is(":checked")) {
+        zip = $("#citystatezip").val()
+        geocodeQuery()
+        return;
+    };
 
     breweryQuery();
 
@@ -69,55 +74,75 @@ console.log(type);
 });
 
 
-$("getDirections").on("click", function () {
-
-
-
+$("thead").on("click", ".getDirections", function () {
+    event.preventDefault();
+    breweryLong = queryResponse[this.id].Long
+    breweryLat = queryResponse[this.id].Lat
+    breweryLatLng =  breweryLat + ", " + breweryLong;
+    getaddress();
+    
+    
+    
 });
 
 
 
 function breweryQuery() {
-    var queryURL = "https://api.openbrewerydb.org/breweries?by_name=" + name + "&by_state=" + state + "&by_city=" + city + "&by_type=" + type + "&by_tag=" + tags;
-    //console.log(queryURL)
+    var queryURL = "https://api.openbrewerydb.org/breweries?by_name=" + name + "&by_state=" + state + "&by_city=" + city + "&by_type=" + type;
+    console.log(queryURL)
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response.length)
-        for(i=0;i<response.length;i++){
-        breweryName = response[i].name;
-        breweryType = response[i].brewery_type;
-        breweryPhone = response[i].phone;
-        // breweryPhone = ""+response[i].phone.split("");
+        for (i = 0; i < response.length; i++) {
+            breweryName = response[i].name;
+            breweryType = response[i].brewery_type;
+            breweryPhone = response[i].phone;
+            // breweryPhone = ""+response[i].phone.split("");
 
-        // if(breweryPhone = ""){
-        //     console.log("nothing")
-        // }else {
-        //     console.log("something")
-        //     phoneSplice();
-        // }
+            // if(breweryPhone = ""){
+            //     console.log("nothing")
+            // }else {
+            //     console.log("something")
+            //     phoneSplice();
+            // }
 
-        breweryURL = response[i].website_url;
-        breweryLong = response[i].longitude;
-        breweryLat = response[i].latitude;
-        
-        var newQuery = $("<tr>").append(
-            $("<td>").text(breweryName),
-            $("<td>").text(breweryType),
-            $("<td>").text(breweryPhone),
-            $("<td>").text(breweryURL),
-        );
-        if(i==0){
-            $("thead").html('<tr><th>Name</th> <th>Type</th> <th>Phone #</th><th>Website</th> <th>Review</th></tr>')
+            breweryURL = response[i].website_url;
+            breweryLong = response[i].longitude;
+            breweryLat = response[i].latitude;
+
+            var results = {
+                name: breweryName,
+                type: breweryType,
+                phone: breweryPhone,
+                URL: breweryURL,
+                Long: breweryLong,
+                Lat: breweryLat
+            };
+
+            queryResponse.push(results);
+            var directionsButton = '<a class="waves-effect waves-light light grey darken-1 btn getDirections" id='+i+'><i class="material-icons left">directions</i>Directions</a>';
+
+            var newQuery = $("<tr>").append(
+                $("<td>").text(breweryName),
+                $("<td>").text(breweryType),
+                $("<td>").text(breweryPhone),
+                $("<td>").text(breweryURL),
+                $("<td>").text("1"),
+                $("<td id='dirBut'>").append(directionsButton)
+
+            );
+            if (i == 0) {
+                $("thead").html('<tr><th>Name</th> <th>Type</th> <th>Phone #</th><th>Website</th> <th>Review</th></tr>')
+            }
+            $("thead").append(newQuery)
+
+
         }
-        $("thead").append(newQuery)
-        
-       
-    }
-    
-    $("#resultstable").slideDown("1000");})
-    
+        //console.log(queryResponse)
+        $("#resultstable").slideDown("1000");
+    })
+
 }
 
 
@@ -136,16 +161,16 @@ function geocodeQuery() {
         //returns state
         state = response.results[0].address_components[3].long_name
         console.log(state)
-
+    breweryQuery();
 
     })
 }
 
-function phoneSplice(){
-            breweryPhone.splice(0, 0, "(");
-            breweryPhone.splice(4, 0, ")");
-            breweryPhone.splice(5, 0, " ");
-            breweryPhone.splice(8, 0, " ");
+function phoneSplice() {
+    breweryPhone.splice(0, 0, "(");
+    breweryPhone.splice(4, 0, ")");
+    breweryPhone.splice(5, 0, " ");
+    breweryPhone.splice(8, 0, " ");
 }
 
 function initMap() {
@@ -156,7 +181,7 @@ function initMap() {
         center: { lat: 41.85, lng: -87.65 }
     });
     directionsDisplay.setMap(map);
-
+    document.getElementById("mappage").scrollIntoView({behavior: "smooth"});
 
     calculateAndDisplayRoute(directionsService, directionsDisplay);
 
@@ -166,7 +191,7 @@ function initMap() {
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     directionsService.route({
         origin: userLatLng,
-        destination: ("28.538803, -81.377317"),
+        destination: breweryLatLng,
         travelMode: 'DRIVING'
     }, function (response, status) {
         if (status === 'OK') {
@@ -205,10 +230,76 @@ function getaddress() {
 
 function createMap() {
     console.log("created")
-    $("body").append('<div id="map"></div>');
-    $("body").append('<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKslsrzneWMfjKEnPVY4lhwgqEtK3wgow&callback=initMap"></script>');
-
+    $("#mappage").append('<div id="map"></div>');
+    $("#mappage").append('<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKslsrzneWMfjKEnPVY4lhwgqEtK3wgow&callback=initMap"></script>');
+    $("#map").css("height", "480px");
 }
 
 
+function sortByName() {
+    var sorted = false;
+    var j=0;
+    while (sorted != true) {
+        for (i = 0; i < queryResponse.length; i++) {
+            sorted2 = false;
+            while (sorted2 != true){
+               
+        }
+        }
+    }
 
+    
+}
+
+function azLetterSort(){
+    if(alphabetArray.indexOf(queryResponse[i].name.charAt(j)) == "" || alphabetArray.indexOf(queryResponse[i+1].name.charAt(j)) == ""){
+        j++;
+        azLetterSort();
+    } else if(alphabetArray.indexOf(queryResponse[i].name.charAt(j)) == alphabetArray.indexOf(queryResponse[i+1].name.charAt(j))){
+        j++;
+        azLetterSort();
+    } else if (alphabetArray.indexOf(queryResponse[i].name.charAt(j)) > alphabetArray.indexOf(queryResponse[i+1].name.charAt(j))){
+        j=0;
+    } else if(alphabetArray.indexOf(queryResponse[i].name.charAt(j)) < alphabetArray.indexOf(queryResponse[i+1].name.charAt(j))){
+        var temp = queryResponse[i+1].name
+        queryResponse[i+1].name = queryResponse[i].name
+        queryResponse[i].name = temp
+        j=0;
+    }
+}
+function zaLetterSort(){
+    if(alphabetArray.indexOf(queryResponse[i].name.charAt(j)) == "" || alphabetArray.indexOf(queryResponse[i+1].name.charAt(j)) == ""){
+        j++;
+        zaLetterSort();
+    } else if(alphabetArray.indexOf(queryResponse[i].name.charAt(j)) == alphabetArray.indexOf(queryResponse[i+1].name.charAt(j))){
+        zaLetterSort();
+        j++;
+    } else if (alphabetArray.indexOf(queryResponse[i].name.charAt(j)) < alphabetArray.indexOf(queryResponse[i+1].name.charAt(j))){
+        j=0;
+    } else if(alphabetArray.indexOf(queryResponse[i].name.charAt(j)) > alphabetArray.indexOf(queryResponse[i+1].name.charAt(j))){
+        var temp = queryResponse[i+1].name
+        queryResponse[i+1].name = queryResponse[i].name
+        queryResponse[i].name = temp
+        j=0;
+    }
+}
+
+function sortByRating() {
+
+};
+
+function sortByDistance() {
+
+};
+
+function sortByType() {
+
+} ;
+
+function alphabetArr() {
+    for(i=0; i<25;i++){
+        alphabetArray.push(String.fromCharCode(65+i));
+        alphabetArray.push(String.fromCharCode(97+i));
+    }
+    console.log(alphabetArray);
+};
