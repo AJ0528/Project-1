@@ -83,6 +83,7 @@ ul.dropdown-content.select-dropdown li span {
 
 #resultstable {
     display: none;
+    clear:both;
 }
 
 [type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after {
