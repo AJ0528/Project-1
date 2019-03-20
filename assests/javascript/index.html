@@ -6,16 +6,18 @@
     <title>test</title>
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link type="text/javascript" media="screen" href="main.js">
+
     
   </head>
   <body>
-    
-<p id='latitudeAndLongitude'></p>
-<p id='address'></p> 
-
-<script src="main.js"></script>
-
-
+      <div id="right-panel">
+          <p>Query suggestions for 'brewery':</p>
+          <ul id="results"></ul>
+        </div>
+       
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_B3bW160bYE4oTm4CGpSl_62h1t_nJt8&libraries=places&callback=initService"
+                async defer></script>
   </body>
 
 </html>

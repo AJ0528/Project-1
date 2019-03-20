@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MAJA Brewery Finder</title>
-  <link rel = "shortcut icon" type="image/png" href="assests/image/beer (1).png">
+  <link rel="shortcut icon" type="image/png" href="assests/image/beer (1).png">
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <link href="materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="parallaxstyle.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link href="materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="parallaxstyle.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
+
 <body>
-    <!--Nav bar-->
+  <!--Nav bar-->
   <nav class="blue-grey darken-2" role="navigation">
     <div class="nav-wrapper container">
-      <span id="logo-container" class="brand-logo amber-text accent-4">MAJA Brewery Finder <i class="fas fa-beer small"></i></span>
+      <span id="logo-container" class="brand-logo amber-text accent-4">MAJA Brewery Finder <i
+          class="fas fa-beer small"></i></span>
       <ul class="right hide-on-med-and-down">
       </ul>
-      </div>
+    </div>
   </nav>
 
   <div id="index-banner" class="parallax-container">
@@ -32,7 +36,9 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="https://images.pexels.com/photos/1400255/pexels-photo-1400255.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="beer image"></div>
+    <div class="parallax"><img
+        src="https://images.pexels.com/photos/1400255/pexels-photo-1400255.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        alt="beer image"></div>
   </div>
 
 
@@ -42,31 +48,31 @@
       <!--   Search Section   -->
       <div class="row">
         <form class="col s12">
-          
-            <div class="col s3">
-              <div class="input-field">
-                <input type="text" id="name" class="autocomplete">
-                <label class="grey-text" for="autocomplete-input">Name</label>
-              </div>
+
+          <div class="col s3">
+            <div class="input-field">
+              <input type="text" id="name" class="autocomplete" type="text">
+              <label class="grey-text" for="autocomplete-input">Name</label>
             </div>
-          
-            <div class="col s3">
-              <div class="input-field">
-                <input id="citystatezip" type="email">
-                <label class="grey-text" for="citystatezip">City or State or Zip code</label>
-              </div>
-                
-                <form action="#">
-                  <input name="radioList" type="radio" id="city"/>
-                  <label class="black-background" for="city">City</label>
-                  
-                  <input name="radioList" type="radio" id="state"/>
-                  <label for="state">State</label>
-                  
-                  <input name="radioList" type="radio" id="zipcode"/>
-                  <label for="zipcode">Zip Code</label>
-                </form>
+          </div>
+
+          <div class="col s3">
+            <div class="input-field">
+              <input id="citystatezip" type="email">
+              <label class="grey-text" for="citystatezip">City or State or Zip code</label>
             </div>
+
+            <form action="#">
+              <input name="radioList" type="radio" id="city" />
+              <label class="black-background" for="city">City</label>
+
+              <input name="radioList" type="radio" id="state" />
+              <label for="state">State</label>
+
+              <input name="radioList" type="radio" id="zipcode" />
+              <label for="zipcode">Zip Code</label>
+            </form>
+          </div>
         </form>
 
         <div class="input-field col s3">
@@ -79,34 +85,33 @@
         </div>
 
         <div class="row right" id="searchbutton">
-          <a class="waves-effect waves-light light grey darken-1 btn" id="runQuery"><i class="material-icons left">search</i>Search</a>
+          <a class="waves-effect waves-light light grey darken-1 btn" id="runQuery"><i
+              class="material-icons left">search</i>Search</a>
         </div>
 
         <div class="row" id="resultstable">
           <table class="highlight grey-text">
             <thead>
               <tr>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>Phone #</th>
-                  <th>Website</th>
-                  <th>Review</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Phone #</th>
               </tr>
             </thead>
-            
-            
-            <tbody> 
-                
 
-              </tbody>
-            </table>
 
-          </div>
-        
+            <tbody>
+
+
+            </tbody>
+          </table>
+
         </div>
-     </div>
+
+      </div>
+    </div>
   </div>
-  
+
 
   <div class="parallax-container valign-wrapper">
     <div class="section no-pad-bot">
@@ -116,7 +121,9 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="https://images.pexels.com/photos/159291/beer-machine-alcohol-brewery-159291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="beer image"></div>
+    <div class="parallax"><img
+        src="https://images.pexels.com/photos/159291/beer-machine-alcohol-brewery-159291.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        alt="beer image"></div>
   </div>
 
   <div class="container">
@@ -142,22 +149,25 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="beer image"></div>
+    <div class="parallax"><img
+        src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        alt="beer image"></div>
   </div>
 
   <footer class="page-footer brown">
     <div class="footer-copyright center-align">
       <div class="container">
-      Copyright © 2019 MAJA</p>
+        Copyright © 2019 MAJA</p>
       </div>
     </div>
   </footer>
-
+<div id="autocompletescript"></div>
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="materialize.js"></script>
   <script src="init.js"></script>
   <script src="./assests/javascript/main.js"></script>
-  </body>
+</body>
+
 </html>
