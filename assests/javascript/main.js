@@ -92,7 +92,6 @@ $("thead").on("click", ".getDirections", function () {
 
 function breweryQuery() {
     var queryURL = "https://api.openbrewerydb.org/breweries?by_name=" + name + "&by_state=" + state + "&by_city=" + city + "&by_type=" + type;
-    console.log(queryURL)
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -100,13 +99,13 @@ function breweryQuery() {
         for (i = 0; i < response.length; i++) {
             breweryName = response[i].name;
             breweryType = response[i].brewery_type;
+            var capTemp = breweryType.charAt(0).toUpperCase();
+            breweryType = breweryType.replaceAt(0, capTemp);
             breweryPhone = response[i].phone;
 
 
                 if(breweryPhone == ""){
-                    console.log("nothing")
                 }else {
-                    console.log("something")
                     phoneSplice();
                 }
 
@@ -127,22 +126,19 @@ function breweryQuery() {
             var directionsButton = '<a class="waves-effect waves-light light grey darken-1 btn getDirections" id='+i+'><i class="material-icons left">directions</i>Directions</a>';
 
             var newQuery = $("<tr>").append(
-                $("<td>").text(breweryName),
+                $("<td>").html('<a href="'+breweryURL+'" target="_blank">'+breweryName+'</a>'),
                 $("<td>").text(breweryType),
                 $("<td>").text(breweryPhoneArr.join("")),
-                $("<td>").text(breweryURL),
-                $("<td>").text("1"),
                 $("<td id='dirBut'>").append(directionsButton)
 
             );
             if (i == 0) {
-                $("thead").html('<tr><th>Name</th> <th>Type</th> <th>Phone #</th><th>Website</th> <th>Review</th></tr>')
+                $("thead").html('<tr><th>Name</th> <th>Type</th> <th>Phone #</th></tr>')
             }
             $("thead").append(newQuery)
 
 
         }
-        //console.log(queryResponse)
         $("#resultstable").slideDown("1000");
     })
 
@@ -152,7 +148,6 @@ function breweryQuery() {
 function geocodeQuery() {
     var queryURL = "https://maps.googleapis.com/maps/api/geocode/json?address=32826&key=AIzaSyB3GiXbPMJMdIlm2PKx-85TIQJrkhIVqnY";
 
-    //console.log(queryURL)
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -160,17 +155,14 @@ function geocodeQuery() {
 
         //returns city
         city = response.results[0].postcode_localities[1]
-        console.log(city)
         //returns state
         state = response.results[0].address_components[3].long_name
-        console.log(state)
     breweryQuery();
 
     })
 }
 
 function phoneSplice() {
-    console.log(breweryPhone)
     breweryPhoneArr = [];
     for(n=0;n<breweryPhone.length;n++){
         switch(n){
@@ -191,7 +183,6 @@ function phoneSplice() {
         
     }
 
-console.log(breweryPhoneArr)   
 }
 
 function initMap() {
@@ -236,21 +227,20 @@ function getaddress() {
         navigator.geolocation.getCurrentPosition(showPosition);
     }
     else {
-        console.log("Geolocation is not supported by this browser.");
+        
     }
 
     function showPosition(position) {
         location.latitude = position.coords.latitude;
         location.longitude = position.coords.longitude;
         userLatLng = location.latitude + ", " + location.longitude;
-        console.log(userLatLng)
+        
         createMap();
     }
 }
 
 
 function createMap() {
-    console.log("created")
     $("#mappage").append('<div id="map"></div>');
     $("#mappage").append('<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKslsrzneWMfjKEnPVY4lhwgqEtK3wgow&callback=initMap"></script>');
     $("#map").css("height", "480px");
@@ -276,7 +266,6 @@ function initService() {
 
     var service = new google.maps.places.AutocompleteService();
     var inputValue =  $("#input").val();
-    console.log(inputValue)
     service.getQueryPredictions({ input: inputValue }, displaySuggestions);
   }
 
@@ -372,7 +361,6 @@ function alphabetArr() {
         alphabetArray.push(String.fromCharCode(65+i));
         alphabetArray.push(String.fromCharCode(97+i));
     }
-    console.log(alphabetArray);
 };
 
 
@@ -384,7 +372,6 @@ function initService() {
       }
 
       predictions.forEach(function(prediction) {
-          console.log(prediction)
         // autoCompleteObj = {
         // };
         
@@ -394,7 +381,6 @@ function initService() {
     var service = new google.maps.places.AutocompleteService();
     
     var inputValue =  $("#name").val() + " brewery";
-    console.log(inputValue)
     service.getQueryPredictions({ input: inputValue }, displaySuggestions);
   }
 
@@ -420,12 +406,12 @@ function initService() {
   function fillInAddress() {
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
-  
+    
     for (var component in componentForm) {
       document.getElementById(component).value = '';
       document.getElementById(component).disabled = false;
     }
-  
+    
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the form.
     for (var i = 0; i < place.address_components.length; i++) {
@@ -444,3 +430,7 @@ function initService() {
   
      
   });
+
+  String.prototype.replaceAt=function(index, replacement) {
+    return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
+}
