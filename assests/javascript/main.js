@@ -7,7 +7,8 @@ var tags = "";
 
 var breweryName;
 var breweryType;
-var breweryPhone = [];
+var breweryPhone;
+var breweryPhoneArr = [];
 var breweryURL;
 var breweryRating;
 var breweryLong;
@@ -51,7 +52,7 @@ $("#runQuery").on("click", function () {
             type = "Micro";
             break;
         case "Regional":
-            type = "Reigonal"
+            type = "Regional"
             break;
         case "Brewpub":
             type = "Brewpub"
@@ -98,14 +99,14 @@ function breweryQuery() {
             breweryName = response[i].name;
             breweryType = response[i].brewery_type;
             breweryPhone = response[i].phone;
-            // breweryPhone = ""+response[i].phone.split("");
 
-            // if(breweryPhone = ""){
-            //     console.log("nothing")
-            // }else {
-            //     console.log("something")
-            //     phoneSplice();
-            // }
+
+                if(breweryPhone == ""){
+                    console.log("nothing")
+                }else {
+                    console.log("something")
+                    phoneSplice();
+                }
 
             breweryURL = response[i].website_url;
             breweryLong = response[i].longitude;
@@ -114,7 +115,7 @@ function breweryQuery() {
             var results = {
                 name: breweryName,
                 type: breweryType,
-                phone: breweryPhone,
+                phone: breweryPhoneArr,
                 URL: breweryURL,
                 Long: breweryLong,
                 Lat: breweryLat
@@ -126,7 +127,7 @@ function breweryQuery() {
             var newQuery = $("<tr>").append(
                 $("<td>").text(breweryName),
                 $("<td>").text(breweryType),
-                $("<td>").text(breweryPhone),
+                $("<td>").text(breweryPhoneArr.join("")),
                 $("<td>").text(breweryURL),
                 $("<td>").text("1"),
                 $("<td id='dirBut'>").append(directionsButton)
@@ -167,10 +168,34 @@ function geocodeQuery() {
 }
 
 function phoneSplice() {
-    breweryPhone.splice(0, 0, "(");
-    breweryPhone.splice(4, 0, ")");
-    breweryPhone.splice(5, 0, " ");
-    breweryPhone.splice(8, 0, " ");
+    console.log(breweryPhone)
+    breweryPhoneArr = [];
+    for(n=0;n<breweryPhone.length;n++){
+        switch(n){
+            case 0:
+            breweryPhoneArr.push("(");
+            break;
+            case 3:
+            breweryPhoneArr.push(")");
+            breweryPhoneArr.push(" ");
+            break;
+            case 6:
+            breweryPhoneArr.push(" ");
+            break;
+            default:
+            break;
+        }
+        breweryPhoneArr.push(breweryPhone.charAt(n));
+        
+    }
+
+console.log(breweryPhoneArr)
+
+    // breweryPhone.splice(0, 0, "(");
+    // breweryPhone.splice(4, 0, ")");
+    // breweryPhone.splice(5, 0, " ");
+    // breweryPhone.splice(9, 0, " ");
+    // breweryPhone = breweryPhone.join("");    
 }
 
 function initMap() {
@@ -234,6 +259,56 @@ function createMap() {
     $("#mappage").append('<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKslsrzneWMfjKEnPVY4lhwgqEtK3wgow&callback=initMap"></script>');
     $("#map").css("height", "480px");
 }
+
+
+
+
+function initService() {
+    var displaySuggestions = function(predictions, status) {
+      if (status != google.maps.places.PlacesServiceStatus.OK) {
+        alert(status);
+        return;
+      }
+
+      predictions.forEach(function(prediction) {
+        //change from list
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(prediction.description));
+        document.getElementById('results').appendChild(li);
+      });
+    };
+
+    var service = new google.maps.places.AutocompleteService();
+    var inputValue =  $("#input").val();
+    console.log(inputValue)
+    service.getQueryPredictions({ input: inputValue }, displaySuggestions);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function sortByName() {
