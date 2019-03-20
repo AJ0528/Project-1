@@ -406,7 +406,6 @@ function initService() {
   function fillInAddress() {
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
-    
     for (var component in componentForm) {
       document.getElementById(component).value = '';
       document.getElementById(component).disabled = false;
@@ -424,12 +423,12 @@ function initService() {
     
   }
   
-    $("#name").on("keypress", function (){
-      $("#autocompletescript").html('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_B3bW160bYE4oTm4CGpSl_62h1t_nJt8&libraries=places&callback=initAutocomplete"async defer></script>')
+//     $("#name").on("keypress", function (){
+//       $("#autocompletescript").html('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_B3bW160bYE4oTm4CGpSl_62h1t_nJt8&libraries=places&callback=initAutocomplete"async defer></script>')
       
   
      
-  });
+//   });
 
   String.prototype.replaceAt=function(index, replacement) {
     return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
