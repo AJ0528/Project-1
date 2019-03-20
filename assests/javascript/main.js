@@ -21,6 +21,8 @@ var queryResponse = [];
 
 var alphabetArray = [];
 
+var autoCompleteObj;
+
 
 //alphabetArr();
 //geocodeQuery();
@@ -189,13 +191,7 @@ function phoneSplice() {
         
     }
 
-console.log(breweryPhoneArr)
-
-    // breweryPhone.splice(0, 0, "(");
-    // breweryPhone.splice(4, 0, ")");
-    // breweryPhone.splice(5, 0, " ");
-    // breweryPhone.splice(9, 0, " ");
-    // breweryPhone = breweryPhone.join("");    
+console.log(breweryPhoneArr)   
 }
 
 function initMap() {
@@ -378,3 +374,73 @@ function alphabetArr() {
     }
     console.log(alphabetArray);
 };
+
+
+function initService() {
+   
+    var displaySuggestions = function(predictions, status) {
+      if (status != google.maps.places.PlacesServiceStatus.OK) {
+        return;
+      }
+
+      predictions.forEach(function(prediction) {
+          console.log(prediction)
+        // autoCompleteObj = {
+        // };
+        
+      });
+    };
+
+    var service = new google.maps.places.AutocompleteService();
+    
+    var inputValue =  $("#name").val() + " brewery";
+    console.log(inputValue)
+    service.getQueryPredictions({ input: inputValue }, displaySuggestions);
+  }
+
+
+  var placeSearch, autocomplete;
+
+  var componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
+  
+  function initAutocomplete() {
+      $("#autocompletescript").empty();
+    autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('name'), {types: ['establishment']});
+      
+  }
+  
+  function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+  
+    for (var component in componentForm) {
+      document.getElementById(component).value = '';
+      document.getElementById(component).disabled = false;
+    }
+  
+    // Get each component of the address from the place details,
+    // and then fill-in the corresponding field on the form.
+    for (var i = 0; i < place.address_components.length; i++) {
+      var addressType = place.address_components[i].types[0];
+      if (componentForm[addressType]) {
+        var val = place.address_components[i][componentForm[addressType]];
+        document.getElementById(addressType).value = val;
+      }
+    }
+    
+  }
+  
+    $("#name").on("keypress", function (){
+      $("#autocompletescript").html('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_B3bW160bYE4oTm4CGpSl_62h1t_nJt8&libraries=places&callback=initAutocomplete"async defer></script>')
+      
+  
+     
+  });
